@@ -82,13 +82,12 @@ When we are working on a feature we must create a branch for it, for example fea
 Here's a small schema:
 
 master - production branch
+  - cycle-1
+    - feat-config-app
 
-cycle-1
-   feat-config-app
-
-cycle-2
-   feat-login-app
-   feat-home-app
+  - cycle-2
+    - feat-login-app
+    - feat-home-app
 
 ---
 
