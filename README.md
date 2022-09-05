@@ -18,8 +18,8 @@ You may use other editor, but you are responsible for the configuration.
 
 ### For native (Kotlin / Swift)
 
-# For iOS platform, run `yarn ios` (ONLY MAC OS)
-# For Android platform, run `yarn android`
+- For iOS platform, run `yarn ios` (ONLY MAC OS)
+- For Android platform, run `yarn android`
 
 ## Folder structure
 
