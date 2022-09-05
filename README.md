@@ -72,6 +72,24 @@ In case of dependencies problems you can follow these steps:
 2. Be sure that all servers are terminated, inclusive others projects servers that was running previously and than restart the 'metro server'.
 3. Before run any iOS build command be sure that you had run 'pod install' inside the 'ios' project folder.
 
+## Branchs
+
+**Master** will be our production branch;
+At each cycle we will have a branch called cycle-x (Quinzenas). These branchs will be merged into the master at the end of each cycle.
+
+When we are working on a feature we must create a branch for it, for example feat-(task description), at the end of the task we must create a Pull Request for the branch of the corresponding cycle.
+
+Here's a small schema:
+
+master - branch master
+
+cycle-1
+   feat-config-app
+
+cycle-2
+   feat-login-app
+   feat-home-app
+
 ---
 
 [expo01]:
