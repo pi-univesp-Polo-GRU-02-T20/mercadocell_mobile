@@ -60,8 +60,7 @@ Examples: Backend calls configuration, global state, application shells (layout)
 
 ### 3. Screens
 
-The code in this folders is where you should handle page routing of the application. The `pages/` is
-for the web and `screens/` for mobile.
+The code in this folders is where you should handle screen routing of the application.
 
 The routes should handle all the initialization needed for the application, as well as final
 rendering for the client.
