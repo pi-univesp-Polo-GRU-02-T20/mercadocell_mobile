@@ -27,7 +27,6 @@ You may use other editor, but you are responsible for the configuration.
 | -------- | -------------------------- |
 | android/ | Native project for android |
 | ios/     | Native project for ios     |
-| public/  | Public assets for web      |
 | src/     | Multiplatform code         |
 
 ## Multiplatform organization
