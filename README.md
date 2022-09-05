@@ -81,7 +81,7 @@ When we are working on a feature we must create a branch for it, for example fea
 
 Here's a small schema:
 
-master - branch master
+master - production branch
 
 cycle-1
    feat-config-app
