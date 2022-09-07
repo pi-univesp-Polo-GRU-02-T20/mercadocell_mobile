@@ -64,6 +64,9 @@ The code in this folders is where you should handle screen routing of the applic
 The routes should handle all the initialization needed for the application, as well as final
 rendering for the client.
 
+## Tests
+To run unit tests, just run on console `yarn jest`
+
 ## Troubleshooting
 
 ### Dependencies
