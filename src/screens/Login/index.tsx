@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import TextField from '../../lib/components/Textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DefaultButton from '../../lib/components/Button';
@@ -7,6 +7,7 @@ import DefaultButton from '../../lib/components/Button';
 const LoginScreen = () => {
   const [user, setUser] = useState<string>('')
   const [password, setPassword] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
 
   return (
     <SafeAreaView style={styles.screen}>
@@ -30,7 +31,8 @@ const LoginScreen = () => {
         <DefaultButton 
           title='ACESSAR' 
           style={styles.button}
-          onPress={() => Alert.alert('oi')}
+          onPress={() => setLoading(true)}
+          loading={loading}
         />
       </View>
     </SafeAreaView>

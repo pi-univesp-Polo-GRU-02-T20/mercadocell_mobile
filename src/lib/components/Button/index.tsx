@@ -1,15 +1,19 @@
 import React, { FC } from "react";
-import { StyleSheet, Text, View, Pressable, ViewStyle } from "react-native";
+import { StyleSheet, Text, ActivityIndicator, Pressable, ViewStyle } from "react-native";
 
 interface ButtonProps {
     title: string;
     style?: ViewStyle | ViewStyle[],
+    loading?: boolean,
     onPress?: () => void
 }
 
-const DefaultButton: FC<ButtonProps> = ({ title, style, onPress }) => 
-    <Pressable style={{...styles.container, ...style}} onPress={onPress} >
-        <Text style={styles.text}>{title}</Text>
+const DefaultButton: FC<ButtonProps> = ({ title, style, onPress, loading }) => 
+    <Pressable style={{...styles.container, ...style}} disabled={loading} onPress={onPress} >
+        {loading 
+            ? <ActivityIndicator color='#125ec0' />
+            : <Text style={styles.text}>{title}</Text>
+        }
     </Pressable>
 
 const styles = StyleSheet.create({  

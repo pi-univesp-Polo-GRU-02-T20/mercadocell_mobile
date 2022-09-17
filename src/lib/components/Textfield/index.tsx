@@ -1,4 +1,4 @@
-import React, { FC, Fragment, ReactNode, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import { StyleSheet, TextInput, View, ViewStyle } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 
