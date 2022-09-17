@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { Alert, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import TextField from '../../lib/components/Textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import DefaultButton from '../../lib/components/Button';
 
 const LoginScreen = () => {
   const [user, setUser] = useState<string>('')
@@ -26,6 +27,11 @@ const LoginScreen = () => {
           onChangeText={setPassword}
           value={password}
         />
+        <DefaultButton 
+          title='ACESSAR' 
+          style={styles.button}
+          onPress={() => Alert.alert('oi')}
+        />
       </View>
     </SafeAreaView>
   )
@@ -48,6 +54,11 @@ const styles = StyleSheet.create({
   },
   input: {
     marginTop: 24
+  },
+  button: {
+    marginTop: 30,
+    width: '60%',
+    alignSelf: 'center'
   }
 })
 
