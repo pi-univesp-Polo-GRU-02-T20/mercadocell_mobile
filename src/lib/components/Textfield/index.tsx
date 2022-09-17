@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 10
+        paddingHorizontal: 10
     },
     input: {
         flex: 1,

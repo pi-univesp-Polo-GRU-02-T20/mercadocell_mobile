@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import TextField from '../../lib/components/Textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DefaultButton from '../../lib/components/Button';
@@ -11,30 +11,34 @@ const LoginScreen = () => {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Login</Text>
-        <TextField 
-          containerInputStyles={styles.input}
-          renderLeftIcon={() => <Icon name='user' size={20} color='#a8a8a8' />}
-          placeholder='Usuário'
-          onChangeText={setUser}
-          value={user}
-        />
-        <TextField 
-          containerInputStyles={styles.input}
-          renderLeftIcon={() => <Icon name='lock' size={20} color='#a8a8a8' />}
-          isPassword
-          placeholder='Senha'
-          onChangeText={setPassword}
-          value={password}
-        />
-        <DefaultButton 
-          title='ACESSAR' 
-          style={styles.button}
-          onPress={() => setLoading(true)}
-          loading={loading}
-        />
-      </View>
+      <KeyboardAvoidingView
+        behavior={Platform.select({ ios: 'position', android: 'padding' })}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>Login</Text>
+          <TextField 
+            containerInputStyles={styles.input}
+            renderLeftIcon={() => <Icon name='user' size={20} color='#a8a8a8' />}
+            placeholder='Usuário'
+            onChangeText={setUser}
+            value={user}
+          />
+          <TextField 
+            containerInputStyles={styles.input}
+            renderLeftIcon={() => <Icon name='lock' size={20} color='#a8a8a8' />}
+            isPassword
+            placeholder='Senha'
+            onChangeText={setPassword}
+            value={password}
+          />
+          <DefaultButton 
+            title='ACESSAR' 
+            style={styles.button}
+            onPress={() => setLoading(true)}
+            loading={loading}
+          />
+        </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   )
 };
