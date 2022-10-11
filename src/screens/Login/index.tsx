@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { FC, useState } from 'react';
+import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import TextField from '../../lib/components/Textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DefaultButton from '../../lib/components/Button';
+import { NavigationProp } from '@react-navigation/native';
+interface LoginScreenProps {
+  navigation: NavigationProp<any>;
+}
 
-const LoginScreen = () => {
+const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
   const [user, setUser] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
@@ -34,7 +38,7 @@ const LoginScreen = () => {
           <DefaultButton 
             title='ACESSAR' 
             style={styles.button}
-            onPress={() => setLoading(true)}
+            onPress={() => navigation.navigate('home')}
             loading={loading}
           />
         </View>
