@@ -1,16 +1,23 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { FC } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import {  StyleSheet, Dimensions, View } from 'react-native';
+import WebView from 'react-native-webview';
 
 interface HomeScreenProps {
   navigation: NavigationProp<any>;
 }
 
 const HomeScreen: FC<HomeScreenProps> = ({navigation}) => {
+  {
+    console.log({width: Dimensions.get("screen").width, height: Dimensions.get("screen").height})
+  }
   return (
     <View style={styles.container}>
-       <Text>Welcome to Mercadocell</Text>
-       <Button title='Ir para login' onPress={() => navigation.navigate('login')}/>
+      <WebView
+        source={{uri: 'https://datastudio.google.com/reporting/f34b98e4-68f0-47c3-bcb9-a1e1ade9da64/page/63e3C'}}
+        containerStyle={styles.webview}
+        originWhitelist={['*']}
+      />
     </View>
   );
 };
@@ -20,7 +27,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  webview: {
+    width: '100%',
+    height: '100%',
+    backgroundColor:'#432'
   }
 })
 
