@@ -9,7 +9,7 @@ export const Routes = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name='login' component={LoginScreen} options={{headerShown: false}} />
-            <Stack.Screen name='home' component={HomeScreen} />
+            <Stack.Screen name='home' component={HomeScreen} options={{title: ""}} />
         </Stack.Navigator>
     )
 }
