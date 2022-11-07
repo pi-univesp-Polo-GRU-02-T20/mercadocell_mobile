@@ -10,9 +10,10 @@ interface TextfieldProps {
     onChangeText?: (text: string) => void;
     value?: string;
     maxLength?: number;
+    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined
 }
 
-const TextField: FC<TextfieldProps> = ({ containerInputStyles, renderLeftIcon, isPassword, placeholder, onChangeText, value, maxLength }) => {
+const TextField: FC<TextfieldProps> = ({ containerInputStyles, renderLeftIcon, isPassword, placeholder, onChangeText, value, maxLength, autoCapitalize }) => {
     const [showPassword, setShowPassword] = useState<boolean>(false)
 
     return (
@@ -26,6 +27,7 @@ const TextField: FC<TextfieldProps> = ({ containerInputStyles, renderLeftIcon, i
                 onChangeText={onChangeText}
                 value={value}
                 maxLength={maxLength}
+                autoCapitalize={autoCapitalize}
             />
             {isPassword && <Icon name={showPassword ? 'eye-off' : 'eye'} color='#a8a8a8' size={20} onPress={() => setShowPassword(old => !old)} />}
         </View>
