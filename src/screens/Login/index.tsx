@@ -57,7 +57,8 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
             onPress={signIn}
             loading={loading}
           />
-          {statusCodeLogin !== 200 && <Text style={styles.errorMessage} >Usuário ou senha inválidos. Tente novamente</Text>}
+          {statusCodeLogin === 401 && <Text style={styles.errorMessage}>Usuário ou senha inválidos. Tente novamente</Text>}
+          {statusCodeLogin === 500 && <Text style={styles.errorMessage}>Não foi possível efetuar o login, ocorreu um erro inesperado</Text>}
         </View>
       </KeyboardAvoidingView>
     </SafeAreaView>

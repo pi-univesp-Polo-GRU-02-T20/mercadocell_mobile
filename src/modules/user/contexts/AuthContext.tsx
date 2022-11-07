@@ -30,6 +30,10 @@ export const AuthProvider: FC<{children: ReactNode}> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [statusCodeLogin, setStatusCodeLogin] = useState<number | null>(null);
 
+  useEffect(() => {
+    autoLogin();
+  }, []);
+
   const loginUser = async (user: string, password: string) => {
     setStatusCodeLogin(null)
     setLoading(true)
@@ -48,12 +52,16 @@ export const AuthProvider: FC<{children: ReactNode}> = ({ children }) => {
   };
 
   const autoLogin = async () => {
-    let token = AsyncStorage.getItem('@MercadoCell:jwt')
+    const jwt = await AsyncStorage.getItem("@MercadoCell:jwt");
 
-    
-  }
+    if (jwt) {
+      setJwtToken(jwt);
+    }
+  };
 
   const logout = async () => {
+    AsyncStorage.clear()
+    setJwtToken(undefined)
   };
 
   return (
