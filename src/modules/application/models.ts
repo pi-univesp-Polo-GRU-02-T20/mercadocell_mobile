@@ -9,3 +9,9 @@ export interface JWTResponse {
     token?: string;
     type?: string;
 }
+
+export interface ChangePasswordResponse {
+    status?: number;
+    error?: string;
+    message?: string;
+}

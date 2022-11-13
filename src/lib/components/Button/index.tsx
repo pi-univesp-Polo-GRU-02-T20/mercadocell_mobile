@@ -5,11 +5,12 @@ interface ButtonProps {
     title: string;
     style?: ViewStyle | ViewStyle[],
     loading?: boolean,
-    onPress?: () => void
+    onPress?: () => void,
+    enabled?: boolean
 }
 
-const DefaultButton: FC<ButtonProps> = ({ title, style, onPress, loading }) => 
-    <Pressable style={{...styles.container, ...style}} disabled={loading} onPress={onPress} >
+const DefaultButton: FC<ButtonProps> = ({ title, style, onPress, loading, enabled = true }) => 
+    <Pressable style={{...styles.container, ...style, opacity: enabled ? 1 : 0.5 }} disabled={loading || !enabled} onPress={onPress} >
         {loading 
             ? <ActivityIndicator color='#125ec0' />
             : <Text style={styles.text}>{title}</Text>

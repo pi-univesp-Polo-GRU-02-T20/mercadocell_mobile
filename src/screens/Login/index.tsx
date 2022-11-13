@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
-import { KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
 import TextField from '../../lib/components/Textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DefaultButton from '../../lib/components/Button';
 import { NavigationProp } from '@react-navigation/native';
 import { useAuth } from '../../modules/user/contexts/AuthContext';
+import { SafeAreaView } from 'react-native-safe-area-context';
 interface LoginScreenProps {
   navigation: NavigationProp<any>;
 }

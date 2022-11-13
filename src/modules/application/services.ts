@@ -28,6 +28,29 @@ async function login(user: string, password: string): Promise<RequestResponse<JW
     }
 }
 
+async function changePassword(user: string, currentPassword: string, newPassword: string): Promise<RequestResponse<JWTResponse>> {
+    try {
+        const { data, status }: AxiosResponse<JWTResponse> = await request.put('/auth/alterarSenha', {
+            login: user, 
+            senha: currentPassword,
+            senhaNova: newPassword
+        })
+
+        return {
+            data,
+            status
+        }
+    } catch(error: any) {
+        console.log('API ERR', error)
+
+        const response = error.response
+        return {
+            status: response ? response.status :  500
+        }
+    }
+}
+
 export {
-    login
+    login,
+    changePassword
 }
