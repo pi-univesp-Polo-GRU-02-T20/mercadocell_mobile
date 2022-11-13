@@ -48,7 +48,7 @@ export const AuthProvider: FC<{children: ReactNode}> = ({ children }) => {
 
     if (status === 200 && jwt && jwt.token) {
       setJwtToken(jwt.token)
-
+      setUser(user)
       AsyncStorage.setItem(STORAGE_JWT, jwt.token)
       AsyncStorage.setItem(STORAGE_USER, user)
     }
