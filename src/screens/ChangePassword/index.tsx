@@ -1,6 +1,7 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { FC, useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import DefaultButton from '../../lib/components/Button';
 import TextField from '../../lib/components/Textfield';
@@ -32,7 +33,7 @@ const ChangePasswordScreen: FC<ChangePasswordProps> = ({}) => {
   const buttonIsEnabled = () => currentPassword.length > 0 && newPassword.length > 0 && newPassword == confirmPassword
 
   return ( 
-    <SafeAreaView style={styles.screen}>
+    <ScrollView style={styles.screen}>
       <KeyboardAvoidingView
         behavior={Platform.select({ ios: 'position', android: 'padding' })}
         style={styles.container}
@@ -74,14 +75,13 @@ const ChangePasswordScreen: FC<ChangePasswordProps> = ({}) => {
           enabled={buttonIsEnabled()}
         />
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    justifyContent: 'center',
   },
   container: {
     width: '100%',

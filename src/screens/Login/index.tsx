@@ -32,7 +32,6 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.screen}>
       <KeyboardAvoidingView
-        behavior={Platform.select({ ios: 'position', android: 'padding' })}
       >
         <View style={styles.container}>
           <Text style={styles.title}>Login</Text>
