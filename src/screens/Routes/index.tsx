@@ -3,8 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Home';
 import LoginScreen from '../Login';
 import { useAuth } from '../../modules/user/contexts/AuthContext';
-import { Alert, Button } from 'react-native';
-import { confirmLogout } from '../../lib/helpers/alert';
 import { createDrawerNavigator, DrawerToggleButton } from '@react-navigation/drawer';
 import ChangePasswordScreen from '../ChangePassword';
 import SideMenu from '../../lib/components/SideMenu';
@@ -13,7 +11,7 @@ const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 export const Routes = () => {
-    const { isAuthenticated, logout } = useAuth()
+    const { isAuthenticated } = useAuth()
 
     return (
         isAuthenticated ? <DrawerSideMenu/> : <UnloggedRoutes/>
@@ -29,8 +27,6 @@ export const UnloggedRoutes = () => {
 }
 
 export const LoggedRoutes = () => {
-    const { logout } = useAuth()
-
     return (
         <Stack.Navigator>
             <Stack.Screen 

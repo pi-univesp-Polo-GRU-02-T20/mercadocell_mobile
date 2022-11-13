@@ -1,7 +1,5 @@
 import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
-import { NavigationProp } from '@react-navigation/native';
 import React, {FC} from 'react' 
-import { Alert } from 'react-native'
 import { useAuth } from '../../../modules/user/contexts/AuthContext';
 import { confirmLogout } from '../../helpers/alert';
 
