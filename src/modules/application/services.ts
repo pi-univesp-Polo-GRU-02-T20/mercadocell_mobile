@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios, { AxiosRequestHeaders, AxiosResponse } from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import { STORAGE_JWT } from '../../lib/helpers/constants';
 import { JWTResponse, RequestResponse } from './models';
 import { ROOT_URL } from './settings';
@@ -69,17 +69,6 @@ async function getHeaderWithToken(): Promise<any> {
 
     return header
 }
-
-// Adicionando um interceptor de Response
-request.interceptors.response.use(function (response) {
-    // Qualquer código de status que esteja dentro de 2xx fará com que essa função seja acionada
-    // Faça algo com os dados de resposta
-    return response;
-  }, function (error) {
-    console.log("error axios interceptor", error)
-
-    return Promise.reject(error);
-  });
 
 export {
     login,
