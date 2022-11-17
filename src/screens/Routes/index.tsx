@@ -3,16 +3,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Home';
 import LoginScreen from '../Login';
 import { useAuth } from '../../modules/user/contexts/AuthContext';
-import { Alert, Button } from 'react-native';
-import { confirmLogout } from '../../lib/helpers/alert';
+import { createDrawerNavigator, DrawerToggleButton } from '@react-navigation/drawer';
+import ChangePasswordScreen from '../ChangePassword';
+import SideMenu from '../../lib/components/SideMenu';
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export const Routes = () => {
-    const { isAuthenticated, logout } = useAuth()
+    const { isAuthenticated } = useAuth()
 
     return (
-        isAuthenticated ? <LoggedRoutes/> : <UnloggedRoutes/>
+        isAuthenticated ? <DrawerSideMenu/> : <UnloggedRoutes/>
     )
 }
 
@@ -25,24 +27,34 @@ export const UnloggedRoutes = () => {
 }
 
 export const LoggedRoutes = () => {
-    const { logout } = useAuth()
-
     return (
         <Stack.Navigator>
             <Stack.Screen 
                 name='home' 
                 component={HomeScreen} 
                 options={{
-                    title: "", 
-                    headerRight: () => (
-                        <Button
-                            onPress={() => confirmLogout(logout)}
-                            title="Sair"
-                            color="#125ec0"
-                        />
-                    )
+                    headerShown: true,
+                    title: '',
+                    headerLeft: () => <DrawerToggleButton/>
+                }} 
+            />
+            <Stack.Screen 
+                name='changePassword' 
+                component={ChangePasswordScreen} 
+                options={{
+                    headerShown: true,
+                    title: 'Alterar senha',
+                    headerBackTitleVisible: false
                 }} 
             />
         </Stack.Navigator>
     )
 }
+
+export const DrawerSideMenu = () => {
+    return (
+      <Drawer.Navigator drawerContent={(props) => <SideMenu drawerProps={props} />} >
+        <Drawer.Screen name="Home" component={LoggedRoutes} options={{title: '', headerShown: false}} />
+      </Drawer.Navigator>
+    );
+  }

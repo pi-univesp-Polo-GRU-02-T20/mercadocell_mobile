@@ -1,6 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { FC } from 'react';
-import {  StyleSheet, Dimensions, View } from 'react-native';
+import {  StyleSheet, View } from 'react-native';
 import WebView from 'react-native-webview';
 
 interface HomeScreenProps {
@@ -8,9 +8,6 @@ interface HomeScreenProps {
 }
 
 const HomeScreen: FC<HomeScreenProps> = ({navigation}) => {
-  {
-    console.log({width: Dimensions.get("screen").width, height: Dimensions.get("screen").height})
-  }
   return (
     <View style={styles.container}>
       <WebView

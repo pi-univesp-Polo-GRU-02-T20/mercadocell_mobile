@@ -1,38 +1,65 @@
-import React, { FC, ReactNode, useState } from "react";
-import { StyleSheet, TextInput, View, ViewStyle } from "react-native";
+import React, { FC, forwardRef, Fragment, ReactNode, useImperativeHandle, useState } from "react";
+import { StyleSheet, Text, TextInput, View, ViewStyle } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
 
-interface TextfieldProps {
-    containerInputStyles?: ViewStyle | ViewStyle[],
-    renderLeftIcon?: () => ReactNode,
-    isPassword?: boolean,
-    placeholder?: string,
+interface TextFieldProps {
+    containerInputStyles?: ViewStyle | ViewStyle[];
+    renderLeftIcon?: () => ReactNode;
+    isPassword?: boolean;
+    placeholder?: string;
     onChangeText?: (text: string) => void;
     value?: string;
     maxLength?: number;
     autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined
 }
 
-const TextField: FC<TextfieldProps> = ({ containerInputStyles, renderLeftIcon, isPassword, placeholder, onChangeText, value, maxLength, autoCapitalize }) => {
+export interface TextFieldForm {
+    showError: (message: string) => void;
+    hideError: () => void;
+    withError: () => boolean;
+}
+
+const TextField = forwardRef<TextFieldForm, TextFieldProps>(({ containerInputStyles, renderLeftIcon, isPassword, placeholder, onChangeText, value, maxLength, autoCapitalize}, ref) => {
     const [showPassword, setShowPassword] = useState<boolean>(false)
+    const [focused, setFocused] = useState<boolean>(false)
+    const [showErrorMessage, setShowErrorMessage] = useState<string | null>(null)
+
+    useImperativeHandle(ref, () => ({
+        showError: (message) => {
+            setShowErrorMessage(message)
+        },
+        hideError: () => {
+            setShowErrorMessage(null)
+        },
+        withError: () => {
+            return showErrorMessage != null
+        }
+    }));
 
     return (
-        <View style={{...styles.containerInput, ...containerInputStyles}} >
-            {renderLeftIcon && renderLeftIcon()}
-            <TextInput
-                testID='testID_textfield'
-                style={styles.input} 
-                secureTextEntry={isPassword && !showPassword} 
-                placeholder={placeholder} 
-                onChangeText={onChangeText}
-                value={value}
-                maxLength={maxLength}
-                autoCapitalize={autoCapitalize}
-            />
-            {isPassword && <Icon name={showPassword ? 'eye-off' : 'eye'} color='#a8a8a8' size={20} onPress={() => setShowPassword(old => !old)} />}
-        </View>
+        <Fragment>
+            <View style={{...styles.containerInput, ...containerInputStyles, borderColor: showErrorMessage ? 'red' : focused ? '#125ec0' :'#b8b8b8'}} >
+                {renderLeftIcon && renderLeftIcon()}
+                <TextInput
+                    testID='testID_textfield'
+                    style={styles.input} 
+                    secureTextEntry={isPassword && !showPassword} 
+                    placeholder={placeholder} 
+                    onChangeText={onChangeText}
+                    value={value}
+                    maxLength={maxLength}
+                    autoCapitalize={autoCapitalize}
+                    onFocus={() => setFocused(true)}
+                    onBlur={() => setFocused(false)}
+                />
+                {isPassword && <Icon name={showPassword ? 'eye-off' : 'eye'} color='#a8a8a8' size={20} onPress={() => setShowPassword(old => !old)} />}
+            </View>
+            {showErrorMessage &&
+                <Text style={styles.errorMessage} >{showErrorMessage}</Text>
+            }
+        </Fragment>
     )
-}
+}) 
 
 const styles = StyleSheet.create({
     containerInput: {
@@ -48,6 +75,11 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         marginLeft: 10
+    },
+    errorMessage: {
+        color: 'red',
+        fontSize: 14,
+        marginTop: 10
     }
 })
 
