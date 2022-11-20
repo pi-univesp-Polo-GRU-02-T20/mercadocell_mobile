@@ -11,7 +11,7 @@ const HomeScreen: FC<HomeScreenProps> = ({navigation}) => {
   return (
     <View style={styles.container}>
       <WebView
-        source={{uri: 'https://datastudio.google.com/reporting/f34b98e4-68f0-47c3-bcb9-a1e1ade9da64/page/63e3C'}}
+        source={{uri: 'https://datastudio.google.com/reporting/4a3190d6-300d-485c-943f-0ba2176bc3d7'}}
         containerStyle={styles.webview}
         originWhitelist={['*']}
       />
