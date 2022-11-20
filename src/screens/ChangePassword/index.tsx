@@ -32,7 +32,9 @@ const ChangePasswordScreen: FC<ChangePasswordProps> = ({}) => {
   async function onPressChangePassword() {
     setLoading(true)
 
-    if (user && validateFields()) {
+    let fieldsIsValid = validateFields()
+
+    if (user && fieldsIsValid) {
       let { status } = await changePassword(user, currentPassword, newPassword)
 
       setLoading(false)
@@ -57,6 +59,10 @@ const ChangePasswordScreen: FC<ChangePasswordProps> = ({}) => {
         position: 'bottom'
       })
 
+    }
+
+    if (!fieldsIsValid) {
+      setLoading(false)
     }
   }
 
