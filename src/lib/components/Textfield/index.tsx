@@ -10,7 +10,8 @@ interface TextFieldProps {
     onChangeText?: (text: string) => void;
     value?: string;
     maxLength?: number;
-    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined
+    autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined,
+    errorMessageColor?: string;
 }
 
 export interface TextFieldForm {
@@ -19,7 +20,7 @@ export interface TextFieldForm {
     withError: () => boolean;
 }
 
-const TextField = forwardRef<TextFieldForm, TextFieldProps>(({ containerInputStyles, renderLeftIcon, isPassword, placeholder, onChangeText, value, maxLength, autoCapitalize}, ref) => {
+const TextField = forwardRef<TextFieldForm, TextFieldProps>(({ containerInputStyles, renderLeftIcon, isPassword, placeholder, onChangeText, value, maxLength, autoCapitalize, errorMessageColor = 'red'}, ref) => {
     const [showPassword, setShowPassword] = useState<boolean>(false)
     const [focused, setFocused] = useState<boolean>(false)
     const [showErrorMessage, setShowErrorMessage] = useState<string | null>(null)
@@ -55,7 +56,7 @@ const TextField = forwardRef<TextFieldForm, TextFieldProps>(({ containerInputSty
                 {isPassword && <Icon name={showPassword ? 'eye-off' : 'eye'} color='#a8a8a8' size={20} onPress={() => setShowPassword(old => !old)} />}
             </View>
             {showErrorMessage &&
-                <Text style={styles.errorMessage} >{showErrorMessage}</Text>
+                <Text style={{...styles.errorMessage, color: errorMessageColor}} >{showErrorMessage}</Text>
             }
         </Fragment>
     )
@@ -77,7 +78,6 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     errorMessage: {
-        color: 'red',
         fontSize: 14,
         marginTop: 10
     }
