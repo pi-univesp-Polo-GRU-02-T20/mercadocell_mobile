@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, Platform, StyleSheet, Text, View } from 'react-native';
-import TextField from '../../lib/components/Textfield';
+import TextField, { TextFieldForm } from '../../lib/components/Textfield';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DefaultButton from '../../lib/components/Button';
 import { NavigationProp } from '@react-navigation/native';
@@ -11,6 +11,9 @@ interface LoginScreenProps {
 }
 
 const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
+  const refUser = useRef<TextFieldForm>(null)
+  const refPassword = useRef<TextFieldForm>(null)
+
   const [user, setUser] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -25,8 +28,34 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
     }
   }, [isAuthenticated])
 
+
+  useEffect(() => {
+    if (user.length > 0 && refUser.current?.withError()) {
+      refUser.current.hideError()
+    }
+    if (password.length > 0 && refPassword.current?.withError()) {
+      refPassword.current.hideError()
+    }
+  }, [user, password])
+
   async function signIn() {
+    if (user.length == 0 || password.length == 0) {
+      showErrorsMessages()
+
+      return
+    }
+
     await login(user, password)
+  }
+
+  function showErrorsMessages() {
+    if (user.length == 0) {
+      refUser.current?.showError('Campo obrigatório')
+    }
+
+    if (password.length == 0) {
+      refPassword.current?.showError('Campo obrigatório')
+    }
   }
 
   return (
@@ -36,20 +65,24 @@ const LoginScreen: FC<LoginScreenProps> = ({ navigation }) => {
         <View style={styles.container}>
           <Text style={styles.title}>Login</Text>
           <TextField 
+            ref={refUser}
             containerInputStyles={styles.input}
             renderLeftIcon={() => <Icon name='user' size={20} color='#a8a8a8' />}
             placeholder='Usuário'
             onChangeText={setUser}
             value={user}
             autoCapitalize='none'
+            errorMessageColor='white'
           />
-          <TextField 
+          <TextField
+            ref={refPassword}
             containerInputStyles={styles.input}
             renderLeftIcon={() => <Icon name='lock' size={20} color='#a8a8a8' />}
             isPassword
             placeholder='Senha'
             onChangeText={setPassword}
             value={password}
+            errorMessageColor='white'
           />
           <DefaultButton 
             title='ACESSAR' 
